@@ -64,6 +64,78 @@ class ViewController: UIViewController {
     }
     
     
+    override func viewDidAppear(_ animated: Bool) {
+        playVideo()
+    }
+    
+    
+
+    
+ 
+    func playVideo(){
+        let url = URL(string: "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8")!
+        self.player.playerLayer?.frame = self.videoView.bounds
+        player.play(url: url, view: videoView)
+    }
+
+   
+    
+    @IBAction func actionPLayButton(_ sender: UIButton) {
+        player.playButtonTapped(button: sender)
+    }
+    
+    //MARK: It Is Used To Handle the Layer In All Orientaion
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
+            guard let self = self else { return }
+            self.player.playerLayer?.frame = self.videoView.bounds
+        }
+    }
+    
+    
+    
+    
+    //MARK: Pangesture USed To Move Brigness and Volume on up and down of left and right screen
+    @objc func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+        let velocity = sender.velocity(in: view)
+        let screenWidth = UIScreen.main.bounds.width
+        let volumeChangeFactor: Float = 0.00006// Adjust this value to control the speed of volume changes
+        let brightnessChangeFactor: CGFloat = 0.00006 // Adjust this value to control the speed of brightness changes
+        
+        switch sender.state {
+        case .began:
+            // Handle gesture began
+            break
+        case .changed:
+            if sender.location(in: view).x < screenWidth / 2 {
+                // Adjust brightness
+                let volumeChange = Float(velocity.y) * volumeChangeFactor// Adjust volume based on gesture velocity
+                                let newVolume = max(0, min(1, previousVolumeLevel - volumeChange))
+                                MPVolumeView.setVolume(newVolume)
+                                previousVolumeLevel = newVolume
+                print(newVolume)
+                
+                
+            
+            } else {
+                let currentBrightness = previousBrightness
+                              let brightnessChange = velocity.y * brightnessChangeFactor // Adjust brightness based on gesture velocity
+                              let newBrightness = max(0, min(1, currentBrightness - brightnessChange))
+                              UIScreen.main.brightness = newBrightness
+                              previousBrightness = newBrightness
+                print(newBrightness)
+            }
+        case .ended:
+            // Handle gesture ended
+            break
+        default:
+            break
+        }
+    }
+    
+    
+    //MARK: Show and hide controls
     @objc func handleVideoControlTap(_ sender: UITapGestureRecognizer? = nil) {
         print("single tap")
         self.VideoControlView.tag = self.VideoControlView.tag == 0 ? 1 : 0
@@ -76,6 +148,9 @@ class ViewController: UIViewController {
     }
     
     
+    
+    
+    //MARK: Fast Forward and backward
     @objc func handleVideoControlTapDouble(_ sender: UITapGestureRecognizer? = nil) {
       print("double tap Gesture")
         self.VideoControlView.tag = 0
@@ -120,76 +195,10 @@ class ViewController: UIViewController {
                   }
               }
         }
-        
-       
     }
     
-    func playVideo(){
-        let url = URL(string: "https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8")!
-        player.play(url: url, view: videoView)
-    }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-      playVideo()
-    }
-    
-    
-    @IBAction func actionPLayButton(_ sender: UIButton) {
-        player.playButtonTapped(button: sender)
-    }
-    
-    //MARK: It Is Used To Handle the Layer In All Orientaion
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        coordinator.animate(alongsideTransition: nil) { [weak self] _ in
-            guard let self = self else { return }
-            self.player.playerLayer?.frame = self.videoView.bounds
-        }
-    }
-    
-    
-    
-    
-    
-    @objc func handlePanGesture(_ sender: UIPanGestureRecognizer) {
-        let translation = sender.translation(in: view)
-        let velocity = sender.velocity(in: view)
-        let screenWidth = UIScreen.main.bounds.width
-        let volumeChangeFactor: Float = 0.00006// Adjust this value to control the speed of volume changes
-        let brightnessChangeFactor: CGFloat = 0.00006 // Adjust this value to control the speed of brightness changes
-        
-        switch sender.state {
-        case .began:
-            // Handle gesture began
-            break
-        case .changed:
-            if sender.location(in: view).x < screenWidth / 2 {
-                // Adjust brightness
-                let volumeChange = Float(velocity.y) * volumeChangeFactor// Adjust volume based on gesture velocity
-                                let newVolume = max(0, min(1, previousVolumeLevel - volumeChange))
-                                MPVolumeView.setVolume(newVolume)
-                                previousVolumeLevel = newVolume
-                print(newVolume)
-                
-                
-            
-            } else {
-                let currentBrightness = previousBrightness
-                              let brightnessChange = velocity.y * brightnessChangeFactor // Adjust brightness based on gesture velocity
-                              let newBrightness = max(0, min(1, currentBrightness - brightnessChange))
-                              UIScreen.main.brightness = newBrightness
-                              previousBrightness = newBrightness
-                print(newBrightness)
-            }
-        case .ended:
-            // Handle gesture ended
-            break
-        default:
-            break
-        }
-    }
 }
+
 
 
 extension MPVolumeView {
