@@ -136,6 +136,7 @@ class VideoPLayer:NSObject{
             self.playButton.setImage(image, for: .normal)
             self.isFinished = true
         }
+        self.videoControlView.tag = 0
         showControl(after: 0.0)
     }
     
@@ -153,8 +154,10 @@ class VideoPLayer:NSObject{
         runOnMainThread {
             self.playButton.isHidden = false
             self.indicator.stopAnimating()
+            self.videoControlView.tag = 1
         }
-        hideControl(after: 3.0)
+       
+        hideControl(after: 1.0)
     }
     
     
@@ -221,6 +224,7 @@ class VideoPLayer:NSObject{
                 let image = UIImage(systemName: "pause.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
                 button.setImage(image, for: .normal)
             }
+            self.videoControlView.tag = 1
             self.hideControl(after: 3.0)
             player?.play()
         }
@@ -230,6 +234,7 @@ class VideoPLayer:NSObject{
                     let image = UIImage(systemName: "pause.fill")?.withTintColor(.white, renderingMode: .alwaysOriginal)
                     button.setImage(image, for: .normal)
                 }
+                self.videoControlView.tag = 1
                 self.hideControl(after: 3.0)
                 player?.play()
             } else {

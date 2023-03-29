@@ -11,6 +11,8 @@ import AVFoundation
 class ViewController: UIViewController {
     
     //MARK: Video Control Outlets
+    @IBOutlet weak var backWardImage: UIImageView!
+    @IBOutlet weak var forwardImage: UIImageView!
     @IBOutlet weak var VideoControlView: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var seekBar: UISlider!
@@ -27,7 +29,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        backWardImage.alpha = 0.0
+        forwardImage.alpha = 0.0
         //MARK: Initialize Video Player
         player = VideoPLayer(indicator: self.loaderIndicator, ControlView: VideoControlView,seekBar: self.seekBar,currentTimeLabel: self.currentTimeLabel,TotalTimeLabel: self.totalTimeLAbel,playButton: self.playButton)
         
@@ -64,8 +67,54 @@ class ViewController: UIViewController {
             player.hideControl(after: 0.0)
         }
     }
+    
+    
     @objc func handleVideoControlTapDouble(_ sender: UITapGestureRecognizer? = nil) {
       print("double tap Gesture")
+        self.VideoControlView.tag = 0
+        player.showControl(after: 0.0)
+        let tapLocation = sender?.location(in: view)
+          let screenWidth = view.bounds.width
+          
+        if let tapLoc = tapLocation?.x{
+            if tapLoc < screenWidth / 2 {
+                  // Double tap on left side of screen
+                print("left side")
+                if let playr = player.player{
+                    let currentTime = playr.currentTime()
+                          let targetTime = max(currentTime - CMTime(seconds: 10, preferredTimescale: 1000), CMTime.zero)
+                          playr.seek(to: targetTime)
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.backWardImage.alpha = 1.0
+                    }) { (finished) in
+                        // Hide the image with a fade-out animation after a delay of 1 second
+                        UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
+                            self.backWardImage.alpha = 0.0
+                        })
+                    }
+                    
+                }
+              }
+            
+            else {
+                  print("right side")
+                  if let playr = player.player{
+                      let currentTime = playr.currentTime()
+                             let duration = playr.currentItem?.duration ?? CMTime.zero
+                             let targetTime = min(currentTime + CMTime(seconds: 10, preferredTimescale: 1), duration)
+                      playr.seek(to: targetTime)
+                      UIView.animate(withDuration: 0.5, animations: {
+                          self.forwardImage.alpha = 1.0
+                      }) { (finished) in
+                          UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
+                              self.forwardImage.alpha = 0.0
+                          })
+                      }
+                  }
+              }
+        }
+        
+       
     }
     
     func playVideo(){

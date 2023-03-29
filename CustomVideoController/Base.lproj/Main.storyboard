@@ -24,6 +24,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1U-0q-yBo">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fast-forward" translatesAutoresizingMaskIntoConstraints="NO" id="faa-0h-wcb">
+                                        <rect key="frame" x="311" y="410" width="32" height="32"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="double-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="Pxb-7M-tmJ">
+                                        <rect key="frame" x="50" y="410" width="32" height="32"/>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weS-en-JSL">
                                         <rect key="frame" x="157.33333333333334" y="388" width="78.333333333333343" height="76"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="1"/>
@@ -59,41 +65,51 @@
                                 <constraints>
                                     <constraint firstItem="weS-en-JSL" firstAttribute="centerX" secondItem="q1U-0q-yBo" secondAttribute="centerX" id="6HC-GU-SfZ"/>
                                     <constraint firstAttribute="bottom" secondItem="HE5-bD-4nE" secondAttribute="bottom" constant="50" id="D0d-AA-td4"/>
+                                    <constraint firstItem="faa-0h-wcb" firstAttribute="centerY" secondItem="weS-en-JSL" secondAttribute="centerY" id="E92-Sk-rjR"/>
+                                    <constraint firstItem="faa-0h-wcb" firstAttribute="height" secondItem="q1U-0q-yBo" secondAttribute="height" multiplier="0.0375587" id="JmW-IO-QoY"/>
                                     <constraint firstItem="HE5-bD-4nE" firstAttribute="leading" secondItem="0jP-YZ-rNs" secondAttribute="trailing" constant="4" id="MEp-LQ-RHR"/>
                                     <constraint firstItem="weS-en-JSL" firstAttribute="centerY" secondItem="q1U-0q-yBo" secondAttribute="centerY" id="MxL-pZ-m3i"/>
+                                    <constraint firstItem="Pxb-7M-tmJ" firstAttribute="centerY" secondItem="weS-en-JSL" secondAttribute="centerY" id="NmQ-vI-eKk"/>
                                     <constraint firstItem="0jP-YZ-rNs" firstAttribute="leading" secondItem="q1U-0q-yBo" secondAttribute="leading" constant="8" id="U0h-fs-qjy"/>
                                     <constraint firstItem="0jP-YZ-rNs" firstAttribute="centerY" secondItem="HE5-bD-4nE" secondAttribute="centerY" id="VLv-dN-f8u"/>
                                     <constraint firstItem="hcq-9N-hEj" firstAttribute="centerY" secondItem="HE5-bD-4nE" secondAttribute="centerY" id="W26-Re-YSo"/>
+                                    <constraint firstItem="faa-0h-wcb" firstAttribute="width" secondItem="q1U-0q-yBo" secondAttribute="width" multiplier="0.0814249" id="Wl7-2M-HCu"/>
                                     <constraint firstAttribute="trailing" secondItem="hcq-9N-hEj" secondAttribute="trailing" constant="8" id="YOX-7h-0Tv"/>
+                                    <constraint firstItem="Pxb-7M-tmJ" firstAttribute="height" secondItem="q1U-0q-yBo" secondAttribute="height" multiplier="0.0375587" id="caa-AZ-ln1"/>
+                                    <constraint firstItem="Pxb-7M-tmJ" firstAttribute="leading" secondItem="q1U-0q-yBo" secondAttribute="leading" constant="50" id="jMW-Xa-Ini"/>
+                                    <constraint firstItem="Pxb-7M-tmJ" firstAttribute="width" secondItem="q1U-0q-yBo" secondAttribute="width" multiplier="0.0814249" id="qg8-gc-Bpp"/>
                                     <constraint firstItem="hcq-9N-hEj" firstAttribute="leading" secondItem="HE5-bD-4nE" secondAttribute="trailing" constant="4" id="uHK-te-XEe"/>
+                                    <constraint firstAttribute="trailing" secondItem="faa-0h-wcb" secondAttribute="trailing" constant="50" id="yDC-UZ-6eR"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ok2-qr-JeX">
-                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <rect key="frame" x="178" y="407.66666666666669" width="37" height="36.666666666666686"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ok2-qr-JeX" secondAttribute="bottom" id="Blh-6N-ReN"/>
+                            <constraint firstItem="ok2-qr-JeX" firstAttribute="height" secondItem="weS-en-JSL" secondAttribute="height" multiplier="0.486842" id="2KA-0p-04t"/>
                             <constraint firstItem="q1U-0q-yBo" firstAttribute="top" secondItem="jJm-vb-euW" secondAttribute="top" id="DIV-P0-9Kj"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ok2-qr-JeX" secondAttribute="trailing" id="DXf-kQ-SZE"/>
                             <constraint firstItem="q1U-0q-yBo" firstAttribute="leading" secondItem="jJm-vb-euW" secondAttribute="leading" id="ESm-hi-r0T"/>
                             <constraint firstItem="weS-en-JSL" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.1" id="FJU-f3-iPJ"/>
+                            <constraint firstItem="ok2-qr-JeX" firstAttribute="centerX" secondItem="q1U-0q-yBo" secondAttribute="centerX" id="HSJ-kq-rPT"/>
+                            <constraint firstItem="ok2-qr-JeX" firstAttribute="centerY" secondItem="q1U-0q-yBo" secondAttribute="centerY" id="Pee-zy-FSK"/>
                             <constraint firstItem="q1U-0q-yBo" firstAttribute="trailing" secondItem="jJm-vb-euW" secondAttribute="trailing" id="Tjq-Rr-H4M"/>
                             <constraint firstItem="weS-en-JSL" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.2" id="aNu-ve-1eu"/>
-                            <constraint firstItem="ok2-qr-JeX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="e3z-d7-dIx"/>
+                            <constraint firstItem="ok2-qr-JeX" firstAttribute="width" secondItem="weS-en-JSL" secondAttribute="width" multiplier="0.47234" id="dMU-US-g5w"/>
                             <constraint firstItem="q1U-0q-yBo" firstAttribute="bottom" secondItem="jJm-vb-euW" secondAttribute="bottom" id="iVC-VO-Hy8"/>
                             <constraint firstItem="jJm-vb-euW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="iXM-Qr-glc"/>
                             <constraint firstAttribute="bottom" secondItem="jJm-vb-euW" secondAttribute="bottom" id="m1g-Fr-rHZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jJm-vb-euW" secondAttribute="trailing" id="nKW-TS-Ke1"/>
-                            <constraint firstItem="ok2-qr-JeX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="npp-PG-XKx"/>
                             <constraint firstItem="jJm-vb-euW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wiN-HV-vri"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="VideoControlView" destination="q1U-0q-yBo" id="Knn-Sg-dJu"/>
+                        <outlet property="backWardImage" destination="Pxb-7M-tmJ" id="U8H-UK-dRl"/>
                         <outlet property="currentTimeLabel" destination="0jP-YZ-rNs" id="BrS-au-CTR"/>
+                        <outlet property="forwardImage" destination="faa-0h-wcb" id="UGy-GQ-B91"/>
                         <outlet property="loaderIndicator" destination="ok2-qr-JeX" id="VwW-7H-HOY"/>
                         <outlet property="playButton" destination="weS-en-JSL" id="SlQ-Hk-Ipw"/>
                         <outlet property="seekBar" destination="HE5-bD-4nE" id="365-dV-emE"/>
@@ -107,6 +123,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="double-arrow" width="32" height="32"/>
+        <image name="fast-forward" width="32" height="32"/>
         <image name="pause.fill" catalog="system" width="117" height="128"/>
         <systemColor name="labelColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
