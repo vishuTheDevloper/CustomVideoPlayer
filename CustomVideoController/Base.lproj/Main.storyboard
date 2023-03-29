@@ -1,24 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CustomVideoController" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jJm-vb-euW">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q1U-0q-yBo">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="weS-en-JSL">
+                                        <rect key="frame" x="157.33333333333334" y="388" width="78.333333333333343" height="76"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="1"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal">
+                                            <imageReference key="image" image="pause.fill" catalog="system" symbolScale="large"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="large" weight="black">
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                            </preferredSymbolConfiguration>
+                                        </state>
+                                        <connections>
+                                            <action selector="actionPLayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O5c-Ov-RPe"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.070000000000000007" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="weS-en-JSL" firstAttribute="centerX" secondItem="q1U-0q-yBo" secondAttribute="centerX" id="6HC-GU-SfZ"/>
+                                    <constraint firstItem="weS-en-JSL" firstAttribute="centerY" secondItem="q1U-0q-yBo" secondAttribute="centerY" id="MxL-pZ-m3i"/>
+                                </constraints>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ok2-qr-JeX">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="labelColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ok2-qr-JeX" secondAttribute="bottom" id="Blh-6N-ReN"/>
+                            <constraint firstItem="q1U-0q-yBo" firstAttribute="top" secondItem="jJm-vb-euW" secondAttribute="top" id="DIV-P0-9Kj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ok2-qr-JeX" secondAttribute="trailing" id="DXf-kQ-SZE"/>
+                            <constraint firstItem="q1U-0q-yBo" firstAttribute="leading" secondItem="jJm-vb-euW" secondAttribute="leading" id="ESm-hi-r0T"/>
+                            <constraint firstItem="weS-en-JSL" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.1" id="FJU-f3-iPJ"/>
+                            <constraint firstItem="q1U-0q-yBo" firstAttribute="trailing" secondItem="jJm-vb-euW" secondAttribute="trailing" id="Tjq-Rr-H4M"/>
+                            <constraint firstItem="weS-en-JSL" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.2" id="aNu-ve-1eu"/>
+                            <constraint firstItem="ok2-qr-JeX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="e3z-d7-dIx"/>
+                            <constraint firstItem="q1U-0q-yBo" firstAttribute="bottom" secondItem="jJm-vb-euW" secondAttribute="bottom" id="iVC-VO-Hy8"/>
+                            <constraint firstItem="jJm-vb-euW" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="iXM-Qr-glc"/>
+                            <constraint firstAttribute="bottom" secondItem="jJm-vb-euW" secondAttribute="bottom" id="m1g-Fr-rHZ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="jJm-vb-euW" secondAttribute="trailing" id="nKW-TS-Ke1"/>
+                            <constraint firstItem="ok2-qr-JeX" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="npp-PG-XKx"/>
+                            <constraint firstItem="jJm-vb-euW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wiN-HV-vri"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="VideoControlView" destination="q1U-0q-yBo" id="Knn-Sg-dJu"/>
+                        <outlet property="loaderIndicator" destination="ok2-qr-JeX" id="VwW-7H-HOY"/>
+                        <outlet property="playButton" destination="weS-en-JSL" id="SlQ-Hk-Ipw"/>
+                        <outlet property="videoView" destination="jJm-vb-euW" id="jHl-TY-LKZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="59" y="-27"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pause.fill" catalog="system" width="117" height="128"/>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
