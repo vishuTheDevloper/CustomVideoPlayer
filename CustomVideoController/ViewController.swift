@@ -8,8 +8,10 @@
 import UIKit
 import AVKit
 import AVFoundation
+import MediaPlayer
 class ViewController: UIViewController {
-    
+    var previousVolumeLevel: Float = AVAudioSession.sharedInstance().outputVolume
+    var previousBrightness = UIScreen.main.brightness
     //MARK: Video Control Outlets
     @IBOutlet weak var backWardImage: UIImageView!
     @IBOutlet weak var forwardImage: UIImageView!
@@ -54,6 +56,11 @@ class ViewController: UIViewController {
         VideoControlView.addGestureRecognizer(tap2)
         tap.require(toFail: tap2)
         
+        
+        
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+        VideoControlView.addGestureRecognizer(panGesture)
+        
     }
     
     
@@ -88,7 +95,7 @@ class ViewController: UIViewController {
                         self.backWardImage.alpha = 1.0
                     }) { (finished) in
                         // Hide the image with a fade-out animation after a delay of 1 second
-                        UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
+                        UIView.animate(withDuration: 0.1, delay: 0.1, animations: {
                             self.backWardImage.alpha = 0.0
                         })
                     }
@@ -106,7 +113,7 @@ class ViewController: UIViewController {
                       UIView.animate(withDuration: 0.5, animations: {
                           self.forwardImage.alpha = 1.0
                       }) { (finished) in
-                          UIView.animate(withDuration: 0.5, delay: 0.5, animations: {
+                          UIView.animate(withDuration: 0.1, delay: 0.1, animations: {
                               self.forwardImage.alpha = 0.0
                           })
                       }
@@ -140,5 +147,58 @@ class ViewController: UIViewController {
             self.player.playerLayer?.frame = self.videoView.bounds
         }
     }
+    
+    
+    
+    
+    
+    @objc func handlePanGesture(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: view)
+        let velocity = sender.velocity(in: view)
+        let screenWidth = UIScreen.main.bounds.width
+        let volumeChangeFactor: Float = 0.00006// Adjust this value to control the speed of volume changes
+        let brightnessChangeFactor: CGFloat = 0.00006 // Adjust this value to control the speed of brightness changes
+        
+        switch sender.state {
+        case .began:
+            // Handle gesture began
+            break
+        case .changed:
+            if sender.location(in: view).x < screenWidth / 2 {
+                // Adjust brightness
+                let volumeChange = Float(velocity.y) * volumeChangeFactor// Adjust volume based on gesture velocity
+                                let newVolume = max(0, min(1, previousVolumeLevel - volumeChange))
+                                MPVolumeView.setVolume(newVolume)
+                                previousVolumeLevel = newVolume
+                print(newVolume)
+                
+                
+            
+            } else {
+                let currentBrightness = previousBrightness
+                              let brightnessChange = velocity.y * brightnessChangeFactor // Adjust brightness based on gesture velocity
+                              let newBrightness = max(0, min(1, currentBrightness - brightnessChange))
+                              UIScreen.main.brightness = newBrightness
+                              previousBrightness = newBrightness
+                print(newBrightness)
+            }
+        case .ended:
+            // Handle gesture ended
+            break
+        default:
+            break
+        }
+    }
 }
 
+
+extension MPVolumeView {
+    static func setVolume(_ volume: Float) {
+        let volumeView = MPVolumeView()
+        let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+            slider?.value = volume
+        }
+    }
+}
