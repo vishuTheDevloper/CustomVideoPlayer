@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     //MARK: Video Control Outlets
     @IBOutlet weak var VideoControlView: UIView!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var seekBar: UISlider!
     
     //MARK: Video View
     @IBOutlet weak var videoView: UIView!
@@ -27,7 +28,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         //MARK: Initialize Video Player
-        player = VideoPLayer(indicator: self.loaderIndicator, ControlView: VideoControlView)
+        player = VideoPLayer(indicator: self.loaderIndicator, ControlView: VideoControlView,seekBar: self.seekBar)
         
         //MARK: Hide Control At Begining
         player.hideControl(after: 0.0)
@@ -74,7 +75,7 @@ class ViewController: UIViewController {
         super.viewWillTransition(to: size, with: coordinator)
         coordinator.animate(alongsideTransition: nil) { [weak self] _ in
             guard let self = self else { return }
-            self.player.playerLayer?.frame = self.VideoControlView.bounds
+            self.player.playerLayer?.frame = self.videoView.bounds
         }
     }
 }

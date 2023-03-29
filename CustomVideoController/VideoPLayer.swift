@@ -16,14 +16,17 @@ class VideoPLayer:NSObject{
     var videoControlView:UIView
     var hideControlsTask: DispatchWorkItem?
     var playerLayer:AVPlayerLayer?
-
-    
-    
-    init(indicator: UIActivityIndicatorView,ControlView:UIView) {
+    var duration:Double?
+    var seekBar:UISlider
+    var CurrenttimeLabel:UILabel?
+    var totalTime:UILabel?
+    init(indicator: UIActivityIndicatorView,ControlView:UIView,seekBar:UISlider) {
         self.indicator = indicator
         self.videoControlView = ControlView
+        self.seekBar = seekBar
+      
     }
-    
+    var timeObserver:Any?
     
     //MARK: Setup and play video
     
@@ -35,11 +38,20 @@ class VideoPLayer:NSObject{
         playerLayer?.videoGravity = AVLayerVideoGravity.resizeAspect
         playerLayer?.zPosition = -1
         view.layer.addSublayer(playerLayer!)
+        self.seekBar.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
         playerItem?.addObserver(self, forKeyPath: "status", options: [.initial, .new], context: nil)
+        
+         timeObserver = player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 1), queue: DispatchQueue.main) { [weak self] time in
+            self?.seekBar.value = Float(time.seconds)
+        }
+        
         player?.play()
     }
     
-    
+    @objc func sliderValueChanged(_ slider: UISlider) {
+        let time = CMTime(seconds: Double(slider.value), preferredTimescale: 1)
+        player?.seek(to: time)
+    }
     
     
     //MARK: Handle Status of Video
@@ -56,6 +68,8 @@ class VideoPLayer:NSObject{
             case .unknown:
                 showLoader()
             case .readyToPlay:
+                duration = playerItem?.duration.seconds
+                seekBar.maximumValue = Float(duration ?? 0.0)
                 hideLoader()
             @unknown default:
                 fatalError("Unknown player item status")

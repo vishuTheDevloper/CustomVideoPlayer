@@ -39,11 +39,17 @@
                                             <action selector="actionPLayButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O5c-Ov-RPe"/>
                                         </connections>
                                     </button>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="HE5-bD-4nE">
+                                        <rect key="frame" x="14" y="772" width="365" height="31"/>
+                                    </slider>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.070000000000000007" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="weS-en-JSL" firstAttribute="centerX" secondItem="q1U-0q-yBo" secondAttribute="centerX" id="6HC-GU-SfZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="HE5-bD-4nE" secondAttribute="trailing" constant="16" id="AoO-UG-RWv"/>
+                                    <constraint firstAttribute="bottom" secondItem="HE5-bD-4nE" secondAttribute="bottom" constant="50" id="D0d-AA-td4"/>
                                     <constraint firstItem="weS-en-JSL" firstAttribute="centerY" secondItem="q1U-0q-yBo" secondAttribute="centerY" id="MxL-pZ-m3i"/>
+                                    <constraint firstItem="HE5-bD-4nE" firstAttribute="leading" secondItem="q1U-0q-yBo" secondAttribute="leading" constant="16" id="eZo-Dr-Qrn"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="ok2-qr-JeX">
@@ -73,6 +79,7 @@
                         <outlet property="VideoControlView" destination="q1U-0q-yBo" id="Knn-Sg-dJu"/>
                         <outlet property="loaderIndicator" destination="ok2-qr-JeX" id="VwW-7H-HOY"/>
                         <outlet property="playButton" destination="weS-en-JSL" id="SlQ-Hk-Ipw"/>
+                        <outlet property="seekBar" destination="HE5-bD-4nE" id="365-dV-emE"/>
                         <outlet property="videoView" destination="jJm-vb-euW" id="jHl-TY-LKZ"/>
                     </connections>
                 </viewController>
